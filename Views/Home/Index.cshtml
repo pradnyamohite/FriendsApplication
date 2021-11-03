@@ -1,8 +1,28 @@
-﻿@{
+﻿@model FriendApplication.Models.frd_login
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+@*<div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+<div class="container">
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label">Mobile Number</label>
+            <input asp-for="frd_num" class="form-control" type="text" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label">Password</label>
+            <input asp-for="frd_pass" class="form-control" type="text" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <input type="submit" value="submit" />
+        </div>
+    </div>
 </div>
