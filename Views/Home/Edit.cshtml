@@ -1,0 +1,43 @@
+﻿@using FriendApplication.Models
+@model FriendApplication.Models.frd_create
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<h1>Edit</h1>
+<div class="container">
+    <form class="form-horizontal" asp-action="Edit">
+       @Html.HiddenFor(model => model.UserId)
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+        @Html.EditorFor(model => model.Fname)
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label">Last Name</label>
+                @Html.EditorFor(model => model.Lname)
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label">Mobile No</label>
+                @Html.EditorFor(model => model.MobileNo)
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label">Email Id</label>
+                @Html.EditorFor(model => model.Email)
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="form-group">
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
+    </form>
+</div>

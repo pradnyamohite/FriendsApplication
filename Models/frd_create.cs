@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace FriendApplication.Models
 {
+    [Table("frd_create")]
     public class frd_create
     {
-        public string frd_fname { get; set; }
+        [Key]
+        public int UserId { get; set; }
+        public string Fname { get; set; }
 
-        public string frd_lname { get; set; }
+        public string Lname { get; set; }
 
-        public int frd_num { get; set; }
+        public string MobileNo { get; set; }
 
-        public int frd_email { get; set; }
+        public string Email { get; set; }
+
+        public string Password { get; set; }
     }
 }
