@@ -49,7 +49,6 @@ H:\FriendApplication\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.D
 H:\FriendApplication\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 H:\FriendApplication\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 H:\FriendApplication\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.csproj.AssemblyReference.cache
 H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.GeneratedMSBuildEditorConfig.editorconfig
 H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.AssemblyInfoInputs.cache
 H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.AssemblyInfo.cs
@@ -82,3 +81,4 @@ H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.csproj.CopyComple
 H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.dll
 H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.pdb
 H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.genruntimeconfig.cache
+H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.csproj.AssemblyReference.cache

@@ -2,6 +2,7 @@
 using FriendApplication.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,7 @@ namespace FriendApplication
             services.AddMvc();
             services.AddDbContext<CoreDatabaseContext>(options => options.UseSqlServer("Server=LAPTOP-14NO1BO3\\SQLEXPRESS;DataBase=CoreDatabase;Integrated Security=True"));
             services.AddControllersWithViews();
+            services.Configure<HtmlHelperOptions>(o => o.ClientValidationEnabled = true);
 
         }
 

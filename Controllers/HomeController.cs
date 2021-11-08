@@ -40,36 +40,40 @@ namespace FriendApplication.Controllers
         {
             return View();
         }
+        
         [HttpPost]
         public IActionResult Index(TbLogin lg)
         {
-            try
-            {
-                if (lg != null)
+                try
                 {
-                    string connectionString = Configuration["ConnectionStrings:defaultConnection"];
-                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    if (lg != null)
                     {
-                        string sql = $"Insert into TbLogin (MobileNo,Password,Name)values ('{lg.MobileNo}','{lg.Password}','{lg.Name}')";
-                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        string connectionString = Configuration["ConnectionStrings:defaultConnection"];
+                        using (SqlConnection connection = new SqlConnection(connectionString))
                         {
-                            command.CommandType = CommandType.Text;
-                            connection.Open();
-                            command.ExecuteNonQuery();
-                            connection.Close();
+                            string sql = $"Insert into TbLogin (MobileNo,Password,Name)values ('{lg.MobileNo}','{lg.Password}','{lg.Name}')";
+                            using (SqlCommand command = new SqlCommand(sql, connection))
+                            {
+                                command.CommandType = CommandType.Text;
+                                connection.Open();
+                                command.ExecuteNonQuery();
+                                connection.Close();
+                            }
+                            ViewBag.Notification = "In login function";
+                            return RedirectToAction("loginUser");
                         }
-                        ViewBag.Notification = "In login function";
-                        return RedirectToAction("loginUser");
-                    }
 
+                    }
+                    else
+                        return View();
                 }
-                else
-                    return View();
-            }
-            catch (Exception ex) {
-                var a = ex.Message;
+                catch (Exception ex)
+                {
+                    var a = ex.Message;
                     return null;
-            }
+                }
+           
+           
         }
 
         public ActionResult loginUser()
@@ -81,41 +85,42 @@ namespace FriendApplication.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult loginUser(TbLogin ulg)
         {
+            
             ViewBag.Notification = "In login function";
-            try
-            {
-                if (ulg != null)
+         
+                try
                 {
-                    string connectionString = Configuration["ConnectionStrings:defaultConnection"];
-                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    if (ulg != null)
                     {
-                        connection.Open();
-                        string sql = "select MobileNo,Password from TbLogin Where MobileNo='" + ulg.MobileNo + "'AND Password ='" + ulg.Password + "'";
-                        //if (ulg.MobileNo == sql)
-                        //{
-                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        string connectionString = Configuration["ConnectionStrings:defaultConnection"];
+                        using (SqlConnection connection = new SqlConnection(connectionString))
                         {
-                            command.CommandType = CommandType.Text;
-                            command.ExecuteNonQuery();
-                            connection.Close();
+                            connection.Open();
+                            string sql = "select MobileNo,Password from TbLogin Where MobileNo='" + ulg.MobileNo + "'AND Password ='" + ulg.Password + "'";
+                            //if (ulg.MobileNo == sql)
+                            //{
+                            using (SqlCommand command = new SqlCommand(sql, connection))
+                            {
+                                command.CommandType = CommandType.Text;
+                                command.ExecuteNonQuery();
+                                connection.Close();
+                            }
+                            return RedirectToAction("frdListView");
+
                         }
-                        return RedirectToAction("frdListView");
-                        //} else
-                        //{
-                        //    return RedirectToAction("Index");
-                        //}
                     }
+                    else
+                        return View();
                 }
-                else
-                    return View();
-            }
-            catch (Exception ex)
-            {
-                var b = ex.Message;
-                return null;
-            }
+                catch (Exception ex)
+                {
+                    var b = ex.Message;
+                    return null;
+                }
+           
 
         }
 
@@ -159,7 +164,7 @@ namespace FriendApplication.Controllers
             }
         }
 
-        //pradnya code
+        
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -285,53 +290,21 @@ namespace FriendApplication.Controllers
             return View();
         }
 
-        //public ActionResult frdListView()
-        //{
-        //    return View();
-        //}
+       
 
         public ActionResult frdListView()
         {
             try
             {
-                //var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
-                //// Skiping number of Rows count  
-                //var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
-                //// Paging Length 10,20  
-                //var length = Request.Form["length"].FirstOrDefault();
-                //// Sort Column Name  
-                //var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-                ////Sort Column Direction(asc, desc)
-                //var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-                //// Search Value from (Search box)  
-                //var searchValue = Request.Form["search[value]"].FirstOrDefault();
-
-                ////Paging Size (10,20,50,100)  
-                //int pageSize = length != null ? Convert.ToInt32(length) : 0;
-                //int skip = start != null ? Convert.ToInt32(start) : 0;
-                //int recordsTotal = 0;
+               
 
                 // Getting all Customer data  
                 var customerData = (from tempData in _context.frd_create
                                     select tempData);
 
-                //Sorting  
-                //if (!(string.isnullorempty(sortcolumn) && string.isnullorempty(sortcolumndirection)))
-                //{
-                //    customerdata = customerdata.orderby(sortcolumn + " " + sortcolumndirection);
-                //}
-                //Search  
-                //if (!string.IsNullOrEmpty(searchValue))
-                //{
-                //    customerData = customerData.Where(m => m.Fname == searchValue);
-                //}
-
-                //total number of rows count   
-                //recordsTotal = customerData.Count();
-                //Paging   
+                
                 var data = customerData.ToList();
-                //Returning Json Data  
-                //return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
+                
                 return View(data);
 
             }
@@ -345,7 +318,7 @@ namespace FriendApplication.Controllers
     
 
 
-        //pradnys code end
+       
 
 
         public IActionResult Privacy()

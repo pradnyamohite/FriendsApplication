@@ -51,9 +51,10 @@
                     <td>@data.Lname</td>
                     <td>@data.MobileNo</td>
                     <td>@data.Email</td>
-                   @* <td><input type="button" value="Edit" id="Edit" name="msg(@data.UserId)"></td>*@
+                    @* <td><input type="button" value="Edit" id="Edit" name="msg(@data.UserId)"></td>*@
                     <td>@Html.ActionLink("Edit", "Edit", new { id = data.UserId })</td>
-                    <td><input type="submit" value="Delete" onclick="return confirm('Are you shure you want to delete recored with id = @data.UserId')" /></td>
+                    <td>@Html.ActionLink("Delete", "cnfDelete", new { id = data.UserId })</td>
+                    @*<td><input type="submit" value="Delete" onclick="return confirm('Are you shure you want to delete recored with id = @data.UserId')" /></td>*@
                 </tr>
                 }
                 }

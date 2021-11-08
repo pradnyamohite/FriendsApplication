@@ -8,14 +8,16 @@
     <form class="form-horizontal" asp-action="loginUser">
         <div class="row">
             <div class="form-group">
-                <label class="control-label">Mobile Number</label>
+                <label asp-for="MobileNo" class="control-label">Mobile Number</label>
                 <input asp-for="MobileNo" class="form-control" type="text" />
+                <span asp-validation-for="MobileNo" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-                <label class="control-label">Password</label>
+                <label  asp-for="Password" class="control-label">Password</label>
                 <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
