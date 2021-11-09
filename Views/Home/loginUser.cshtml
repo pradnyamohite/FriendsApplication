@@ -4,31 +4,39 @@
 *@
 @{
 }
-<div class="container">
-    <form class="form-horizontal" asp-action="loginUser">
-        <div class="row">
+
+
+
+@{ ViewData["Title"] = "Login";
+    //Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<h1>Login</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="LoginUser">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MobileNo" class="control-label">Mobile Number</label>
-                <input asp-for="MobileNo" class="form-control" type="text" />
+                <label asp-for="MobileNo" class="control-label"></label>
+                <input asp-for="MobileNo" class="form-control" />
                 <span asp-validation-for="MobileNo" class="text-danger"></span>
             </div>
-        </div>
-        <div class="row">
             <div class="form-group">
-                <label  asp-for="Password" class="control-label">Password</label>
+                <label asp-for="Password" class="control-label"></label>
                 <input asp-for="Password" class="form-control" type="password" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-        </div>
-        <div class="row">
             <div class="form-group">
-                <input type="submit" value="Login" />
+                <input type="submit" value="Login" class="btn btn-primary" />
             </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <p>If new user ? <a href="Home/Index"> Sign Up </a></p>
+            <div class="row">
+                <div class="form-group">
+                    <p>If new user ? <a href="Home/Index"> Sign Up </a></p>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+

@@ -1,5 +1,6 @@
 H:\FriendApplication\bin\Debug\netcoreapp3.1\appsettings.Development.json
 H:\FriendApplication\bin\Debug\netcoreapp3.1\appsettings.json
+H:\FriendApplication\bin\Debug\netcoreapp3.1\libman.json
 H:\FriendApplication\bin\Debug\netcoreapp3.1\FriendApplication.exe
 H:\FriendApplication\bin\Debug\netcoreapp3.1\FriendApplication.deps.json
 H:\FriendApplication\bin\Debug\netcoreapp3.1\FriendApplication.runtimeconfig.json
@@ -81,4 +82,3 @@ H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.csproj.CopyComple
 H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.dll
 H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.pdb
 H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.genruntimeconfig.cache
-H:\FriendApplication\obj\Debug\netcoreapp3.1\FriendApplication.csproj.AssemblyReference.cache

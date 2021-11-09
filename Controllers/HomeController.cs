@@ -85,22 +85,21 @@ namespace FriendApplication.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult loginUser(TbLogin ulg)
+        //[ValidateAntiForgeryToken]
+        public IActionResult loginUser(TbLogin ulg)
         {
-            
-            ViewBag.Notification = "In login function";
-         
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     if (ulg != null)
                     {
-                        string connectionString = Configuration["ConnectionStrings:defaultConnection"];
-                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        string connectionstring = Configuration["connectionstrings:defaultconnection"];
+                        using (SqlConnection connection = new SqlConnection(connectionstring))
                         {
                             connection.Open();
-                            string sql = "select MobileNo,Password from TbLogin Where MobileNo='" + ulg.MobileNo + "'AND Password ='" + ulg.Password + "'";
-                            //if (ulg.MobileNo == sql)
+                            string sql = "select mobileno,password from tblogin where mobileno='" + ulg.MobileNo + "'and password ='" + ulg.Password + "'";
+                            //if (ulg.mobileno == sql)
                             //{
                             using (SqlCommand command = new SqlCommand(sql, connection))
                             {
@@ -108,22 +107,24 @@ namespace FriendApplication.Controllers
                                 command.ExecuteNonQuery();
                                 connection.Close();
                             }
-                            return RedirectToAction("frdListView");
+                            return RedirectToAction("frdlistview");
 
                         }
                     }
-                    else
-                        return View();
+                    //else
+                    //    return view();
                 }
                 catch (Exception ex)
                 {
                     var b = ex.Message;
                     return null;
                 }
-           
 
+               
+            }
+            return View();
         }
-
+        
 
         public ActionResult Create() {
             return View();
@@ -208,7 +209,10 @@ namespace FriendApplication.Controllers
             return View(fd);
         }
 
-        [HttpPost]
+
+       
+
+            [HttpPost]
         public ActionResult Edit(frd_create fredit)
         {
             try
@@ -240,7 +244,12 @@ namespace FriendApplication.Controllers
                 return null;
             }
         }
-        
+
+        //[HttpGet]
+        //public ActionResult cnfDelete(int id)
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         public ActionResult cnfDelete(int id)

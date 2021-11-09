@@ -23,7 +23,7 @@
     <div class="row">
         <input type="submit" value="Create New" onclick="redirecttonewpage()" />
     </div>
-    
+    <br>
 
     <div style="width:90%; margin:0 auto;">
         @if (Model != null)
@@ -53,8 +53,8 @@
                     <td>@data.Email</td>
                     @* <td><input type="button" value="Edit" id="Edit" name="msg(@data.UserId)"></td>*@
                     <td>@Html.ActionLink("Edit", "Edit", new { id = data.UserId })</td>
-                    <td>@Html.ActionLink("Delete", "cnfDelete", new { id = data.UserId })</td>
-                    @*<td><input type="submit" value="Delete" onclick="return confirm('Are you shure you want to delete recored with id = @data.UserId')" /></td>*@
+                    @*<td>@Html.ActionLink("Delete", "cnfDelete", new { id = data.UserId })</td>*@
+                    <td><input type="submit" value="Delete" onclick="return confirm('Are you shure you want to delete recored with id = @data.UserId')" /></td>
                 </tr>
                 }
                 }
