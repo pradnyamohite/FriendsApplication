@@ -10,25 +10,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using FriendApplication.Data;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace FriendApplication.Controllers
 {
+    
     public class HomeController : Controller
     {
-      
+        
+
         db dbop = new db();
-         private readonly SignInManager<IdentityUser> _signInManager;
+         
        
         private CoreDatabaseContext _context;
 
 
         public IConfiguration Configuration { get; set; }
-        public HomeController(IConfiguration configuration,CoreDatabaseContext context, SignInManager<IdentityUser> signInManager)
+        public HomeController(IConfiguration configuration,CoreDatabaseContext context)
         {
             Configuration = configuration;
             _context = context;
-            _signInManager = signInManager;
+            
         }
         public IActionResult Index()
         {
@@ -84,38 +86,10 @@ namespace FriendApplication.Controllers
         //[ValidateAntiForgeryToken]
         public IActionResult loginUser(TbLogin ulg)
         {
+            
             if (ModelState.IsValid)
             {
-                //try
-                //{
-                //    if (ulg != null)
-                //    {
-                //        string connectionString = Configuration["ConnectionStrings:defaultConnection"];
-                //        using (SqlConnection connection = new SqlConnection(connectionString))
-                //        {
-                //            connection.Open();
-                //            string sql = "select MobileNo,Password from TbLogin where MobileNo='" + ulg.MobileNo + "'and Password ='" + ulg.Password + "'";
-                //            //if (ulg.mobileno == sql)
-                //            //{
-                //            using (SqlCommand command = new SqlCommand(sql, connection))
-                //            {
-                //                command.CommandType = CommandType.Text;
-                //                command.ExecuteNonQuery();
-                //                connection.Close();
-                //            }
-                //            return RedirectToAction("frdListView");
-
-                //        }
-                //    }
-                //    //else
-                //    //    return view();
-                //}
-
-                //catch (Exception ex)
-                //{
-                //    var b = ex.Message;
-                //    return null;
-                //}
+               
                 int check = 0;
                 try
                 {
@@ -164,13 +138,7 @@ namespace FriendApplication.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("loginUser", "Home");
-        }
-
+        
 
         public ActionResult Create() {
             return View();

@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace FriendApplication
 {
@@ -32,11 +33,8 @@ namespace FriendApplication
             services.AddDbContext<CoreDatabaseContext>(options =>options.UseSqlServer("Server=LAPTOP-14NO1BO3\\SQLEXPRESS;DataBase=CoreDatabase;Integrated Security=True"));
             services.AddControllersWithViews();
             services.Configure<HtmlHelperOptions>(o => o.ClientValidationEnabled = true);
-            //services.AddIdentity<IdentityUser , IdentityRole>().AddSignInManager<CoreDatabaseContext>();
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
-            });
+         
+            
 
         }
 
@@ -52,10 +50,12 @@ namespace FriendApplication
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+            //app.UseSession();
 
             app.UseRouting();
 
             app.UseAuthorization();
+            //app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

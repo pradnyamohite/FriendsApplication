@@ -11,26 +11,30 @@
     <form class="form-horizontal" asp-action="Create">
     <div class="row">
         <div class="form-group">
-            <label class="control-label">First Name</label>
+            <label asp-for="Fname" class="control-label">First Name</label>
             <input asp-for="Fname" class="form-control" type="text" />
+            <span asp-validation-for="Fname" class="text-danger"></span>
         </div>
     </div>
     <div class="row">
         <div class="form-group">
-            <label class="control-label">Last Name</label>
+            <label asp-for="Lname" class="control-label">Last Name</label>
             <input asp-for="Lname" class="form-control" type="text" />
+            <span asp-validation-for="Lname" class="text-danger"></span>
         </div>
     </div>
     <div class="row">
         <div class="form-group">
-            <label class="control-label">Mobile No</label>
+            <label asp-for="MobileNo" class="control-label">Mobile No</label>
             <input asp-for="MobileNo" class="form-control" type="text" />
+            <span asp-validation-for="MobileNo" class="text-danger"></span>
         </div>
     </div>
     <div class="row">
         <div class="form-group">
-            <label class="control-label">Email Id</label>
+            <label asp-for="Email" class="control-label">Email Id</label>
             <input asp-for="Email" class="form-control" type="text" />
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
     </div>
     
