@@ -1,49 +1,53 @@
-﻿@model FriendApplication.Models.TbLogin
+﻿@model FriendApplication.Models.TbRegister
 @{
     ViewData["Title"] = "Home Page";
 }
 
 @*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>*@
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
 <div class="container">
     <div class="col-sm-4">
         <form class="form-horizontal" asp-action="Index">
+            <div asp-validation-summary="All" class="text-danger"></div>
             @Html.Hidden("UserId")
             @*<div class="row">
-            <div class="form-group">
+                    <div class="form-group">
 
-                <label class="control-label">UserId</label>
-                <input asp-for="UserId" class="form-control" type="text" />
-            </div>
-        </div>*@
+                        <label class="control-label">UserId</label>
+                        <input asp-for="UserId" class="form-control" type="text" />
+                    </div>
+                </div>*@
 
             <div class="row">
 
                 <div class="form-group">
-                    <label class="control-label">Name</label>
+                    <label asp-for="Name" class="control-label">Name</label>
                     <input asp-for="Name" class="form-control" type="text" />
-
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label">Mobile Number</label>
+                    <label asp-for="MobileNo" class="control-label">Mobile Number</label>
                     <input asp-for="MobileNo" class="form-control" type="text" />
+                    <span asp-validation-for="MobileNo" class="text-danger"></span>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label">Password</label>
+                    <label asp-for="Password" class="control-label">Password</label>
                     <input asp-for="Password" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label">Confirm Password</label>
+                    <label asp-for="ConfPassword" class="control-label">Confirm Password</label>
                     <input asp-for="ConfPassword" class="form-control" type="password" />
+                    <span asp-validation-for="ConfPassword" class="text-danger"></span>
                 </div>
             </div>
             <div class="row">
@@ -54,10 +58,13 @@
         </form>
     </div>
     <div class="col-sm-4"></div>
-    </div>
+</div>
 @section Scripts {
-<script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script>
 
 
-</script>
+    </script>
 }

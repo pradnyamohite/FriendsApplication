@@ -10,7 +10,7 @@ namespace FriendApplication.Data
     public class CoreDatabaseContext: DbContext
     {
         public CoreDatabaseContext(DbContextOptions<CoreDatabaseContext> options)
-            :base(options)
+            : base(options)
         {
         }
         public DbSet<frd_create> frd_create{ get; set; }

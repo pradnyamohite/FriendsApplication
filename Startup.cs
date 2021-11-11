@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,14 @@ namespace FriendApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<CoreDatabaseContext>(options => options.UseSqlServer("Server=LAPTOP-14NO1BO3\\SQLEXPRESS;DataBase=CoreDatabase;Integrated Security=True"));
+            services.AddDbContext<CoreDatabaseContext>(options =>options.UseSqlServer("Server=LAPTOP-14NO1BO3\\SQLEXPRESS;DataBase=CoreDatabase;Integrated Security=True"));
             services.AddControllersWithViews();
             services.Configure<HtmlHelperOptions>(o => o.ClientValidationEnabled = true);
+            //services.AddIdentity<IdentityUser , IdentityRole>().AddSignInManager<CoreDatabaseContext>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+            });
 
         }
 

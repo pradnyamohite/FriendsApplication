@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using FriendApplication.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace FriendApplication.Controllers
 {
@@ -17,24 +18,17 @@ namespace FriendApplication.Controllers
     {
       
         db dbop = new db();
-        //private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
+         private readonly SignInManager<IdentityUser> _signInManager;
+       
         private CoreDatabaseContext _context;
 
-        //public HomeController(CoreDatabaseContext context)
-        //{
-        //    _context = context;
-        //}
 
         public IConfiguration Configuration { get; set; }
-        public HomeController(IConfiguration configuration,CoreDatabaseContext context)
+        public HomeController(IConfiguration configuration,CoreDatabaseContext context, SignInManager<IdentityUser> signInManager)
         {
             Configuration = configuration;
             _context = context;
+            _signInManager = signInManager;
         }
         public IActionResult Index()
         {
@@ -42,8 +36,9 @@ namespace FriendApplication.Controllers
         }
         
         [HttpPost]
-        public IActionResult Index(TbLogin lg)
+        public IActionResult Index(TbRegister lg)
         {
+            
                 try
                 {
                     if (lg != null)
@@ -65,13 +60,14 @@ namespace FriendApplication.Controllers
 
                     }
                     else
-                        return View();
+                       return View();
                 }
                 catch (Exception ex)
                 {
                     var a = ex.Message;
                     return null;
                 }
+           
            
            
         }
@@ -90,41 +86,91 @@ namespace FriendApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                //try
+                //{
+                //    if (ulg != null)
+                //    {
+                //        string connectionString = Configuration["ConnectionStrings:defaultConnection"];
+                //        using (SqlConnection connection = new SqlConnection(connectionString))
+                //        {
+                //            connection.Open();
+                //            string sql = "select MobileNo,Password from TbLogin where MobileNo='" + ulg.MobileNo + "'and Password ='" + ulg.Password + "'";
+                //            //if (ulg.mobileno == sql)
+                //            //{
+                //            using (SqlCommand command = new SqlCommand(sql, connection))
+                //            {
+                //                command.CommandType = CommandType.Text;
+                //                command.ExecuteNonQuery();
+                //                connection.Close();
+                //            }
+                //            return RedirectToAction("frdListView");
+
+                //        }
+                //    }
+                //    //else
+                //    //    return view();
+                //}
+
+                //catch (Exception ex)
+                //{
+                //    var b = ex.Message;
+                //    return null;
+                //}
+                int check = 0;
                 try
                 {
+                   
                     if (ulg != null)
                     {
-                        string connectionstring = Configuration["connectionstrings:defaultconnection"];
-                        using (SqlConnection connection = new SqlConnection(connectionstring))
+                        
+                        string connectionString = Configuration["ConnectionStrings:defaultConnection"];
+                        using (SqlConnection connection = new SqlConnection(connectionString))
                         {
-                            connection.Open();
-                            string sql = "select mobileno,password from tblogin where mobileno='" + ulg.MobileNo + "'and password ='" + ulg.Password + "'";
-                            //if (ulg.mobileno == sql)
-                            //{
-                            using (SqlCommand command = new SqlCommand(sql, connection))
-                            {
-                                command.CommandType = CommandType.Text;
-                                command.ExecuteNonQuery();
-                                connection.Close();
-                            }
-                            return RedirectToAction("frdlistview");
+                            SqlCommand cmd = new SqlCommand("CheckLogin", connection);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@MobileNo", ulg.MobileNo);
+                            cmd.Parameters.AddWithValue("@Password", ulg.Password);
 
+                            connection.Open();
+                            SqlDataReader dr = cmd.ExecuteReader();
+
+                            while (dr.Read())
+                            {
+                                check = Convert.ToInt32(dr["Value"]);
+                            }
+
+                        }
+                        if(check != 0)
+                        {
+                            return RedirectToAction("frdListView");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+                            return View();
                         }
                     }
                     //else
-                    //    return view();
+                    //    return View();
                 }
                 catch (Exception ex)
                 {
                     var b = ex.Message;
                     return null;
                 }
+                ViewBag.Valid = check;
 
-               
             }
             return View();
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("loginUser", "Home");
+        }
+
 
         public ActionResult Create() {
             return View();
